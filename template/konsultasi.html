@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if user.is_authenticated and user.is_superuser %}
+<div class="container-fluid px-0 d-flex flex-row konsultasi justify-content-center">
+	<div class="col-md-8">
+		{% for konsul in data_konsul %}
+		<div class="card artikel-box border-0">
+			<div class="card-header border-0 artikel-judul">
+				{{ konsul.judul }}
+			</div>
+			<div class="card-body border-0 artikel-isi">
+				<p class="text-muted">Pengirim:&nbsp{{ konsul.email }}<br>
+				{{ konsul.masalah|linebreaks }}
+			</div>
+			<div class="card-footer" style="text-align: right; color: white;">
+				{{ konsul.tanggal }}
+			</div>
+		</div>
+		<div class="d-flex justify-content-end">
+			<button class="btn btn-primary" onclick="location.href='{% url 'konsultasi_jawab' %}'">Jawab</button><br>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% else %}
+<div class="container-fluid flex-row form-container">
+	<div class="col-md-8 form">
+		<div class="container">
+			<h2>Form Konsultasi</h2>
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					{{ form.email|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.judul|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.masalah|as_crispy_field }}
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Kirim</button><br>
+			</form>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home">
+		<div class="card home-card">
+			<div class="card-header home-card-header">
+				<h4>AGENSI BIRO USAHA</h4>
+			</div>
+			<div class="card-body home-card-body">
+				Lorem ipsum dolor<br>
+				dolor ipsum lorem dolor ipsum lorem
+			</div>
+			{% if not user.is_authenticated %}
+			<div class="card-footer home-card-footer">
+				<button class="btn btn-primary navbar-btn" onclick="location.href='{% url 'sign_up' %}'">Gabung Sekarang</button>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 50vh; background-color: white;">
+	<div class="row d-flex w-100">
+		<div class="col">
+			<div class="card border-0" style="text-align: center;">
+			<h5>Anggota</h5><br>
+			<p>Kami menyediakan fitur pendaftaran anggota untuk para calon pengusaha yang ingin bergabung dengan kami. Kami akan membantu semua anggota membuka usaha dari awal hingga tuntas.</p>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card border-0" style="text-align: center;">
+			<h5>Artikel</h5><br>
+			<p>Kami menyediakan artikel tentang usaha yang bisa memberi ide, inovasi, maupun motivasi untuk para pengusaha maupun calon pengusaha.</p>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card border-0" style="text-align: center;">
+			<h5>Konsultasi</h5><br>
+			<p>Kami menyediakan media konsultasi untuk calon pengusaha maupun pengusaha yang memiliki kendala dalam usahanya, konsultasi akan dijawab secara langsung oleh ahli bisnis kami.</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

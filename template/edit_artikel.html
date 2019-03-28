@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid px-0 flex-row form-container">
+	<div class="col-md-8 form">
+		<div class="container">
+			<h2>Edit Artikel</h2>
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					{{ form.judul|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.isi|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.kategori|as_crispy_field }}
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Kirim Perubahan</button><br>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

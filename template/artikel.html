@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid d-flex justify-content-center" style="padding-top: 38px;">
+	{% if user.is_authenticated and user.is_superuser %}
+	<button class="btn btn-primary navbar-btn" onclick="location.href='{% url 'buat_artikel' %}'">Buat Artikel</button>
+	{% endif %}
+</div>
+<div class="container-fluid px-0 artikel flex-wrap">
+	<div class="container-fluid d-flex justify-content-center">
+		<h2>ARTIKEL</h2>
+	</div>
+	{% for p in post %}
+	<div class="col-sm-6">
+		<div class="card">
+			<div class="card-body border-0 artikel-isi">
+				<div class="judul"><a href="{% url 'isi_artikel' p.id %}">{{ p.judul }}</a></div>
+				<p class="text-muted">Posted on:&nbsp{{ p.tanggal }}<br></p>
+				<p class="card-text">{{ p.isi|truncatechars:100|linebreaks }}</p>
+				<div class="btn-group d-flex justify-content-end">
+					{% if user.is_authenticated and user.is_superuser %}
+					<button class="btn btn-primary navbar-btn" onclick="location.href='{% url 'edit_artikel' p.id %}'">Edit</button>
+					<button class="btn btn-primary navbar-btn" onclick="location.href='{% url 'hapus_artikel' p.id %}'">Hapus</button>
+					{% endif %}
+					<button class="btn btn-primary navbar-btn" onclick="location.href='{% url 'isi_artikel' p.id %}'">Read More</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

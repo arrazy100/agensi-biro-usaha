@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load humanize %}
+
+{% block content %}
+<div class="container-fluid px-0 d-flex flex-row profil justify-content-center">
+	<div class="col-md-8">
+		<div class="card artikel-box border-0">
+			<div class="card-header artikel-judul">
+				<h2>Profil</h2>
+			</div>
+			<div class="card-body artikel-isi">
+				Nama:<pre>{{ profil.nama_depan }} {{ profil.nama_belakang }}</pre>
+				Jenis Kelamin:<pre>{{ profil.jenis_kelamin }}</pre>
+				Nomor KTP:<pre>{{ profil.nomor_ktp }}</pre>
+				Alamat:<pre>{{ profil.alamat }}</pre>
+				Nama Usaha:<pre>{{ usaha.nama_usaha }}</pre>
+				Modal Pinjaman:<pre>RP.&nbsp{{ usaha.modal_pinjaman|intcomma }}</pre>
+			</div>
+			<div class="card-footer">
+				<button class="btn btn-success navbar-btn" onclick="location.href='{% url 'edit_profil' profil.id %}'">Edit Profil</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 form">
+		<div class="container">
+			<h2>Form Pinjam Modal</h2>
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					{{ form.judul|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.modal_pinjaman|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.keterangan|as_crispy_field }}
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Kirim</button><br>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

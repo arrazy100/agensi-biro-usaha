@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<div class="container-fluid px-0 d-flex flex-row usaha justify-content-center">
+	<div class="col-md-10">
+		<h2>Daftar Usaha</h2>
+		<table class="table table-bordered">
+			<thead style="background-color: black; color: white;">
+				<tr>
+					<th>Aksi</th>
+					<th>Kode Usaha</th>
+					<th>Nama usaha</th>
+					<th>Rating Usaha</th>>
+					<th>Pinjaman Modal</th>
+				</tr>
+			</thead>
+			<tbody style="background-color: white; color: black;">
+				{% for i in list %}
+				<tr>
+					<td>
+						{% if user.is_authenticated and user.is_superuser %}
+						<a href="{% url 'edit_usaha' i.id %}">Edit</a><br>
+						<a href="{% url 'hapus_usaha' i.id %}">Hapus</a>
+						{% endif %}
+					</td>
+					<td>{{ i.id }}</td>
+					<td>{{ i.nama_usaha }}</td>
+					<td>{{ i.rating_usaha }}</td>
+					<td>Rp. {{ i.modal_pinjaman|intcomma }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<h2>Persetujuan Pinjaman</h2>
+		<table class="table table-bordered">
+			<thead style="background-color: black; color: white;">
+				<tr>
+					<th>Aksi</th>
+					<th>Nama User</th>
+					<th>Nama Usaha</th>
+					<th>Email</th>
+					<th>Judul</th>>
+					<th>Pinjaman</th>
+				</tr>
+			</thead>
+			<tbody style="background-color: white; color: black;">
+				{% for i in pinjam %}
+				<tr>
+					<td>
+						<a href="{% url 'pinjaman_setuju' i.id %}">Setuju</a><br>
+						<a href="{% url 'pinjaman_tolak' i.id %}">Tolak</a>
+					</td>
+					<td>{{ i.nama_user }}</td>
+					<td>{{ i.nama_usaha }}</td>
+					<td>{{ i.email }}</td>
+					<td>{{ i.judul }}</td>
+					<td>Rp. {{ i.modal_pinjaman|intcomma }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid px-0 form-container flex-row">
+	<div class="col-md-8 form">
+		<div class="container">
+			<br><h2>Edit Usaha</h2>
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					{{ form.nama_usaha|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.rating_usaha|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.modal_pinjaman|as_crispy_field }}
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Kirim Perubahan</button><br>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

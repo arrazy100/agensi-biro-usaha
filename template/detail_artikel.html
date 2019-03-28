@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid justify-content-center artikel">
+	<div class="col-md-8 card detail-artikel">
+		<br><h3>{{ artikel.judul }}</h3>
+		<p align="left" class="text-muted">Posted on:&nbsp{{ artikel.tanggal }}</p>
+		<p>{{ artikel.isi|linebreaks }}</p>
+	</div>
+</div>
+{% endblock %}

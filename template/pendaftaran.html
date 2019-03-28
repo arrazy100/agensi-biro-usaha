@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid px-0 login" style="padding-top:64px; padding-bottom: 48px;">
+	<div class="card text-center login-box w-50">
+		<div class="card-header login-content">
+			<h3>Sign Up</h3>
+			<p style="text-align: left; color: red;">{{ error }}</p>
+		</div>
+		<div class="card-body login-content">
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					{{ form.nama_depan|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.nama_belakang|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.email|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.username|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.password|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.confirm_password|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.nama_usaha|as_crispy_field }}
+				</div>
+		</div>
+		<div class="card-footer login-content">
+			<button type="submit" class="btn btn-primary btn-block">Daftar</button>
+			<br>
+			</form>
+			<div class="d-flex justify-content-center link">
+				<p>Sudah punya akun? <a href="{% url 'sign_in' %}">Sign In</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

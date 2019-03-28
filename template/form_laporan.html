@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load humanize %}
+
+{% block content %}
+
+<div class="container-fluid px-0 d-flex flex-row anggota justify-content-center" style="padding-top: 48px;">
+	<div class="col-md-10">
+		<table class="table table-bordered">
+			<thead style="background-color: black; color: white;">
+				<tr>
+					<th>Aksi</th>
+					<th>Kode Usaha</th>
+					<th>Jenis Laporan</th>
+					<th>Bulan ke-</th>
+					<th>Tahun</th>
+					<th>Keterangan</th>
+				</tr>
+			</thead>
+			<tbody style="background-color: white; color: black;">
+				{% for i in laporan %}
+				<tr>
+					<td>
+						<a href="#">Ubah</a><br>
+						<a href="#">Hapus</a>
+					</td>
+					<td>{{ i.kode_usaha }}</td>
+					<td>{{ i.jenis_laporan }}</td>
+					<td>{{ i.bulan }}</td>
+					<td>{{ i.tahun }}</td>
+					<td>Rp.&nbsp{{ i.keterangan|intcomma }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="container-fluid px-0 flex-row form-container">
+	<div class="col-md-8 form">
+		<div class="container">
+			<h2>Form Laporan</h2>
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					{{ form.jenis_laporan|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.bulan|as_crispy_field }}
+				</div>
+				<div class="form-group">
+					{{ form.keterangan|as_crispy_field }}<br>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Kirim Laporan</button><br>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

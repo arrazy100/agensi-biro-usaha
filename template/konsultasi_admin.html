@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid px-0 d-flex flex-row artikel">
+	<div class="col-md-8">
+		<h2>Form Konsultasi</h2>
+		<form method="post">
+			{% csrf_token %}
+			<div class="form-group">
+				{{ form.email|as_crispy_field }}
+			</div>
+			<div class="form-group">
+				{{ form.judul|as_crispy_field }}
+			</div>
+			<div class="form-group">
+				{{ form.isi|as_crispy_field }}
+			</div>
+			<button type="submit" class="btn btn-primary btn-block">Kirim</button>
+		</form>
+	</div>
+	<div class="col-md-2">
+	
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid px-0 d-flex flex-row anggota justify-content-center">
+	<div class="col-md-10">
+		<h2>Daftar Anggota</h2>
+		<table class="table table-bordered">
+			<thead style="background-color: black; color: white;">
+				<tr>
+					<th>Aksi</th>
+					<th>Nama depan</th>
+					<th>Nama belakang</th>>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Kode usaha</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody style="background-color: white; color: black;">
+				{% for i in anggota %}
+				<tr>
+					<td>
+						<a href="{% url 'edit_anggota' i.id %}">Edit</a><br>
+						<a href="{% url 'hapus_anggota' i.id %}">Hapus</a>
+					</td>
+					<td>{{ i.nama_depan }}</td>
+					<td>{{ i.nama_belakang }}</td>
+					<td>{{ i.username }}</td>
+					<td>{{ i.password }}</td>
+					<td>{{ i.kode_usaha }}</td>
+					<td>{{ i.status }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}
